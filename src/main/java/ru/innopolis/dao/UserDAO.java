@@ -4,7 +4,7 @@ import ru.innopolis.model.User;
 
 import java.util.UUID;
 
-public interface UserDAO extends GenericUuidDAO<User, UUID, String> {
+public interface UserDAO extends GenericUuidDAO<User, String, String> {
 
     boolean userNameExist(String username);
 

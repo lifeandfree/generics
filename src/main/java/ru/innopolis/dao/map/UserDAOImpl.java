@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * @author Ilya_Sukhachev
  */
-public class UserDAOImpl extends AbstractUuidDao<User, UUID, String> implements UserDAO {
+public class UserDAOImpl extends AbstractUuidDao<User, String, String> implements UserDAO {
 
     public UserDAOImpl() {
         super(User.class, new HashMap<>());

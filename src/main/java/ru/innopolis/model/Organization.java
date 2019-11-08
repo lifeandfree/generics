@@ -72,18 +72,37 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         this.users = users;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Organization that = (Organization) o;
+//        return Objects.equals(id, that.id) &&
+//                Objects.equals(organizationName, that.organizationName);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, organizationName);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(organizationName, that.organizationName);
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt) &&
+                organizationStatus == that.organizationStatus &&
+                Objects.equals(organizationName, that.organizationName) &&
+                Objects.equals(users, that.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, organizationName);
+        return Objects.hash(id, createdAt, updatedAt, organizationStatus, organizationName, users);
     }
 
     @Override

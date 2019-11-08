@@ -6,11 +6,11 @@ import java.util.UUID;
 /**
  * Представление сущности дополнительной информации о пользователя в системе.
  */
-public class UserInfo implements Identified<UUID> {
+public class UserInfo implements Identified<User>, Comparable<UserInfo> {
 
     private static final long serialVersionUID = -3415549133677946887L;
 
-    private final UUID id = UUID.randomUUID();
+    private User id;
     private String lastName;
     private String firstName;
     private String secondName;
@@ -19,8 +19,12 @@ public class UserInfo implements Identified<UUID> {
     }
 
     @Override
-    public UUID getId() {
+    public User getId() {
         return id;
+    }
+
+    public void setId(User id) {
+        this.id = id;
     }
 
     public String getLastName() {
@@ -47,17 +51,33 @@ public class UserInfo implements Identified<UUID> {
         this.secondName = secondName;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        UserInfo userInfo = (UserInfo) o;
+//        return Objects.equals(id, userInfo.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(id, userInfo.id);
+        return Objects.equals(id, userInfo.id) &&
+                Objects.equals(lastName, userInfo.lastName) &&
+                Objects.equals(firstName, userInfo.firstName) &&
+                Objects.equals(secondName, userInfo.secondName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, lastName, firstName, secondName);
     }
 
     @Override
@@ -70,5 +90,10 @@ public class UserInfo implements Identified<UUID> {
                 .append(", secondName='").append(secondName).append('\'')
                 .append('}')
                 .toString();
+    }
+
+    @Override
+    public int compareTo(UserInfo o) {
+        return lastName.compareTo(o.lastName);
     }
 }

@@ -5,27 +5,28 @@ import ru.innopolis.model.enums.UserStatus;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 /**
  * Представление сущности пользователя в системе
  */
-public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, CreateAtIdentified {
+public class User implements Identified<String>, IUUIDIdentified<String, String>, CreateAtIdentified {
 
     private static final long serialVersionUID = -7931737332645464539L;
 
-    private final UUID id;
+    private String id;
     private final String uuid;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private UserStatus userStatus;
     private final String username;
     private String password;
-    private final String email;
+    private String email;
     private Role role;
     private UserInfo userInfo;
 
-    public User(UUID id, String uuid, String username, String email) {
+    public User(String id, String uuid, String username, String email) {
         this.id = id;
         this.uuid = uuid;
         this.username = username;
@@ -34,8 +35,12 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
-    public UUID getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -57,6 +62,10 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
 
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Role getRole() {
@@ -103,6 +112,22 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.userInfo = userInfo;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        User user = (User) o;
+//        return Objects.equals(id, user.id) &&
+//                Objects.equals(uuid, user.uuid) &&
+//                Objects.equals(username, user.username) &&
+//                Objects.equals(email, user.email);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return 29 * Objects.hash(id, uuid, username, email);
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,13 +135,19 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         User user = (User) o;
         return Objects.equals(id, user.id) &&
                 Objects.equals(uuid, user.uuid) &&
+                Objects.equals(createdAt, user.createdAt) &&
+                Objects.equals(updatedAt, user.updatedAt) &&
+                userStatus == user.userStatus &&
                 Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email);
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) &&
+                role == user.role &&
+                Objects.equals(userInfo, user.userInfo);
     }
 
     @Override
     public int hashCode() {
-        return 29 * Objects.hash(id, uuid, username, email);
+        return Objects.hash(id, uuid, createdAt, updatedAt, userStatus, username, password, email, role, userInfo);
     }
 
     @Override
