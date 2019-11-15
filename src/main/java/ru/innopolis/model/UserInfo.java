@@ -1,11 +1,18 @@
 package ru.innopolis.model;
 
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 /**
  * Представление сущности дополнительной информации о пользователя в системе.
  */
+@Entity
+@Table(name = "UserInfo")
 public class UserInfo implements Identified<UUID> {
 
     private static final long serialVersionUID = -3415549133677946887L;
@@ -18,7 +25,9 @@ public class UserInfo implements Identified<UUID> {
     public UserInfo() {
     }
 
-    @Override
+    @Override@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = true)
     public UUID getId() {
         return id;
     }
@@ -27,6 +36,7 @@ public class UserInfo implements Identified<UUID> {
         this.id = id;
     }
 
+    @Column(name = "lastName", nullable = false, length = 25)
     public String getLastName() {
         return lastName;
     }
@@ -35,6 +45,7 @@ public class UserInfo implements Identified<UUID> {
         this.lastName = lastName;
     }
 
+    @Column(name = "firstName", nullable = false, length = 25)
     public String getFirstName() {
         return firstName;
     }
@@ -43,29 +54,13 @@ public class UserInfo implements Identified<UUID> {
         this.firstName = firstName;
     }
 
+    @Column(name = "secondName", length = 25)
     public String getSecondName() {
         return secondName;
     }
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(id, userInfo.id) &&
-                Objects.equals(lastName, userInfo.lastName) &&
-                Objects.equals(firstName, userInfo.firstName) &&
-                Objects.equals(secondName, userInfo.secondName);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return 29 * Objects.hash(id, lastName, firstName, secondName);
     }
 
     @Override

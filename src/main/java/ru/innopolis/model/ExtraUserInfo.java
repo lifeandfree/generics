@@ -1,5 +1,6 @@
 package ru.innopolis.model;
 
+import javax.persistence.Column;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ public class ExtraUserInfo extends UserInfo {
     public ExtraUserInfo() {
     }
 
+    @Column(name = "address", nullable = false, length = 255)
     public String getAddress() {
         return address;
     }

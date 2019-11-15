@@ -2,6 +2,15 @@ package ru.innopolis.model;
 
 import ru.innopolis.model.enums.OrganizationStatus;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,6 +35,9 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
     }
 
     @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
     }
@@ -35,6 +47,7 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
     }
 
     @Override
+    @Column(name = "createdAt", nullable = false)
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -45,6 +58,7 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
     }
 
     @Override
+    @Column(name = "updatedAt", nullable = true)
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
@@ -54,6 +68,8 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         this.updatedAt = updatedAt;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "organizationStatus", nullable = false, length = 100, unique = false)
     public OrganizationStatus getOrganizationStatus() {
         return organizationStatus;
     }
@@ -62,6 +78,8 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         this.organizationStatus = organizationStatus;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "organizationName", nullable = false, length = 255, unique = true)
     public String getOrganizationName() {
         return organizationName;
     }
@@ -70,27 +88,13 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         this.organizationName = organizationName;
     }
 
+    @ManyToMany(targetEntity = User.class, cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     public Set<User> getUsers() {
         return users;
     }
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Organization that = (Organization) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(updatedAt, that.updatedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return 29 * Objects.hash(id, createdAt, updatedAt);
     }
 
     @Override

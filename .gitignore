@@ -18,3 +18,11 @@ target/
 *.log
 out/
 build/
+
+# Gradle
+.gradletasknamecache
+.gradle/
+**/build/
+bin/
+**/out/
+**/webpack-build/

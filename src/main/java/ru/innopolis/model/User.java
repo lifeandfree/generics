@@ -3,13 +3,15 @@ package ru.innopolis.model;
 import ru.innopolis.model.enums.Role;
 import ru.innopolis.model.enums.UserStatus;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Представление сущности пользователя в системе
  */
+@Entity
+@Table(name = "Users")
 public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, CreateAtIdentified {
 
     private static final long serialVersionUID = -7931737332645464539L;
@@ -30,6 +32,9 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = true)
     public UUID getId() {
         return id;
     }
@@ -39,6 +44,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
+    @Column(name = "uuid", unique = true, nullable = false, length = 36)
     public String getUuid() {
         return uuid;
     }
@@ -47,6 +53,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.uuid = uuid;
     }
 
+    @Column(name = "username", nullable = false, length = 255, unique = true)
     public String getUsername() {
         return username;
     }
@@ -55,6 +62,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.username = username;
     }
 
+    @Column(name = "password", nullable = false, length = 255)
     public String getPassword() {
         return password;
     }
@@ -63,6 +71,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.password = password;
     }
 
+    @Column(name = "email", nullable = false, length = 255, unique = true)
     public String getEmail() {
         return email;
     }
@@ -71,6 +80,8 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.email = email;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false, length = 100, unique = false)
     public Role getRole() {
         return role;
     }
@@ -79,6 +90,8 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.role = role;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "userStatus", nullable = false, length = 100, unique = false)
     public UserStatus getUserStatus() {
         return userStatus;
     }
@@ -88,6 +101,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
+    @Column(name = "createdAt", nullable = false)
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -98,6 +112,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
+    @Column(name = "updatedAt", nullable = true)
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
@@ -107,6 +122,8 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         this.updatedAt = updatedAt;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userinfo", nullable = true, unique = false)
     public UserInfo getUserInfo() {
         return userInfo;
     }
@@ -116,36 +133,7 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(uuid, user.uuid) &&
-                Objects.equals(createdAt, user.createdAt) &&
-                Objects.equals(updatedAt, user.updatedAt) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(uuid, createdAt, updatedAt, username, password, email);
-    }
-
-    @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", uuid='" + uuid + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", userStatus=" + userStatus +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                ", userInfo=" + userInfo +
-                '}';
+        return new StringBuilder().append("User{").append("id=").append(id).append(", uuid='").append(uuid).append('\'').append(", createdAt=").append(createdAt).append(", updatedAt=").append(updatedAt).append(", userStatus=").append(userStatus).append(", username='").append(username).append('\'').append(", password='").append(password).append('\'').append(", email='").append(email).append('\'').append(", role=").append(role).append(", userInfo=").append(userInfo).append('}').toString();
     }
 }
