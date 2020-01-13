@@ -18,3 +18,5 @@ target/
 *.log
 out/
 build/
+.gradle/
+log/

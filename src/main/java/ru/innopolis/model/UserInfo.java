@@ -52,23 +52,6 @@ public class UserInfo implements Identified<UUID> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(id, userInfo.id) &&
-                Objects.equals(lastName, userInfo.lastName) &&
-                Objects.equals(firstName, userInfo.firstName) &&
-                Objects.equals(secondName, userInfo.secondName);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return 29 * Objects.hash(id, lastName, firstName, secondName);
-    }
-
-    @Override
     public String toString() {
         return new StringBuilder(getClass().getSimpleName())
                 .append("{")

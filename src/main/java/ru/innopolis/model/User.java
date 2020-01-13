@@ -116,24 +116,6 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(uuid, user.uuid) &&
-                Objects.equals(createdAt, user.createdAt) &&
-                Objects.equals(updatedAt, user.updatedAt) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(uuid, createdAt, updatedAt, username, password, email);
-    }
-
-    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +

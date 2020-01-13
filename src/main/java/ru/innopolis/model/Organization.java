@@ -79,21 +79,6 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Organization that = (Organization) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(updatedAt, that.updatedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return 29 * Objects.hash(id, createdAt, updatedAt);
-    }
-
-    @Override
     public String toString() {
         return "Organization{" +
                 "id=" + id +

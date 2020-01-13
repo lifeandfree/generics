@@ -1,5 +1,6 @@
 package ru.innopolis.dao.list;
 
+import org.springframework.stereotype.Component;
 import ru.innopolis.dao.UserInfoDAO;
 import ru.innopolis.model.UserInfo;
 
