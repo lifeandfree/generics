@@ -38,7 +38,7 @@ public class Wildcard {
         List<? super Integer> superList = new ArrayList<Number>(); // прикрутили контравариантность
         superList.add(54);
         System.out.println(superList.get(0));
-//        System.out.println(getFirst(superList));
+        System.out.println(getFirst(superList));
 //
 
     }
@@ -46,14 +46,15 @@ public class Wildcard {
     public static Double sum(List<? extends Number> numList) {
         return numList
                 .stream()
-                .map(Number::doubleValue)
+                .map(Number::doubleValue) // number -> number.doubleValue()
                 .reduce((s1, s2) -> s1 + s2)
                 .orElse(0D);
     }
 
     public static <T> T getFirst(List<? super T> list) {
+        return (T) list.get(0);
 //        return list.get(0); // что-то пошло не так...
-        return null;
+//        return null;
     }
 
 
