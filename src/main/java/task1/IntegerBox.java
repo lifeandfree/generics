@@ -10,18 +10,4 @@ public class IntegerBox extends GenericBox<Integer> {
         super(value);
     }
 
-    @Override
-    public Integer getValue() {
-        return super.getValue();
-    }
-
-    @Override
-    public void setValue(Integer value) {
-        super.setValue(value);
-    }
-
-    @Override
-    public void print() {
-        super.print();
-    }
 }

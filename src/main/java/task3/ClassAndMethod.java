@@ -14,6 +14,7 @@ public class ClassAndMethod {
         /* обобщенный метод */
         Integer[] a = {1};
         Integer[] b = {2};
+//        Long[] b = {2L};
         swap(a, b);
         System.out.println(a[0] + "--" + b[0]);
 

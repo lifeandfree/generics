@@ -7,5 +7,4 @@ public interface IUUIDIdentified<UUID extends Serializable, PK extends Serializa
 
     String getUuid();
 
-    void setUuid(String uuid);
 }

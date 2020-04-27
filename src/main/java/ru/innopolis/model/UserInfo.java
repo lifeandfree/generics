@@ -10,7 +10,7 @@ public class UserInfo implements Identified<UUID> {
 
     private static final long serialVersionUID = -3415549133677946887L;
 
-    private UUID id;
+    private final UUID id = UUID.randomUUID();
     private String lastName;
     private String firstName;
     private String secondName;
@@ -21,10 +21,6 @@ public class UserInfo implements Identified<UUID> {
     @Override
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getLastName() {
@@ -56,16 +52,12 @@ public class UserInfo implements Identified<UUID> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(id, userInfo.id) &&
-                Objects.equals(lastName, userInfo.lastName) &&
-                Objects.equals(firstName, userInfo.firstName) &&
-                Objects.equals(secondName, userInfo.secondName);
+        return Objects.equals(id, userInfo.id);
     }
 
     @Override
     public int hashCode() {
-
-        return 29 * Objects.hash(id, lastName, firstName, secondName);
+        return Objects.hash(id);
     }
 
     @Override

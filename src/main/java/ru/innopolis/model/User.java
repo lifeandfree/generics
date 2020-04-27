@@ -14,18 +14,22 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
 
     private static final long serialVersionUID = -7931737332645464539L;
 
-    private UUID id;
-    private String uuid;
+    private final UUID id;
+    private final String uuid;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private UserStatus userStatus;
-    private String username;
+    private final String username;
     private String password;
-    private String email;
+    private final String email;
     private Role role;
     private UserInfo userInfo;
 
-    public User() {
+    public User(UUID id, String uuid, String username, String email) {
+        this.id = id;
+        this.uuid = uuid;
+        this.username = username;
+        this.email = email;
         this.role = Role.ROLE_OPERATOR;
     }
 
@@ -34,25 +38,13 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     @Override
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -65,10 +57,6 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Role getRole() {
@@ -120,17 +108,15 @@ public class User implements Identified<UUID>, IUUIDIdentified<String, UUID>, Cr
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(uuid, user.uuid) &&
-                Objects.equals(createdAt, user.createdAt) &&
-                Objects.equals(updatedAt, user.updatedAt) &&
+        return Objects.equals(id, user.id) &&
+                Objects.equals(uuid, user.uuid) &&
                 Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
                 Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, createdAt, updatedAt, username, password, email);
+        return 29 * Objects.hash(id, uuid, username, email);
     }
 
     @Override

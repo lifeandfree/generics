@@ -14,24 +14,22 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
 
     private static final long serialVersionUID = -9005741475704378708L;
 
-    private Long id;
+    private final Long id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private OrganizationStatus organizationStatus;
-    private String organizationName;
+    private final String organizationName;
     private Set<User> users;
 
-    public Organization() {
+    public Organization(Long id, String organizationName) {
+        this.id = id;
+        this.organizationName = organizationName;
         this.users = new HashSet<>();
     }
 
     @Override
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override
@@ -66,10 +64,6 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         return organizationName;
     }
 
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
-    }
-
     public Set<User> getUsers() {
         return users;
     }
@@ -84,13 +78,12 @@ public class Organization implements Identified<Long>, CreateAtIdentified {
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(updatedAt, that.updatedAt);
+                Objects.equals(organizationName, that.organizationName);
     }
 
     @Override
     public int hashCode() {
-        return 29 * Objects.hash(id, createdAt, updatedAt);
+        return Objects.hash(id, organizationName);
     }
 
     @Override
