@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Представление сущности пользователя в системе
  */
-public class User implements Identified<String>, IUUIDIdentified<String, String>, CreateAtIdentified {
+public class User implements Identified<String>, IUUIDIdentified<String, String>, CreateAtIdentified, Comparable<User> {
 
     private static final long serialVersionUID = -7931737332645464539L;
 
@@ -164,5 +164,10 @@ public class User implements Identified<String>, IUUIDIdentified<String, String>
                 ", role=" + role +
                 ", userInfo=" + userInfo +
                 '}';
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.getId().compareTo(o.getId());
     }
 }

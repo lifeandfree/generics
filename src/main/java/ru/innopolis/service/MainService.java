@@ -38,7 +38,7 @@ public class MainService {
         User user = new User(UUID.randomUUID().toString(), UUID.randomUUID().toString(),"Admin1", "test@test.ru");
 
         UserInfo userInfo = new UserInfo();
-        userInfo.setId(user);
+        userInfo.setId(user); // 1
         userInfo.setFirstName("name");
         userInfo.setSecondName("secondname");
         userInfo.setLastName("lastname");
@@ -47,7 +47,7 @@ public class MainService {
 
         ExtraUserInfo extraUserInfo = new ExtraUserInfo();
         extraUserInfo.setAddress("Address2");
-        extraUserInfo.setId(user);
+        extraUserInfo.setId(user); // 2
         extraUserInfo.setFirstName("name2");
         extraUserInfo.setSecondName("secondname2");
         extraUserInfo.setLastName("lastname2");
@@ -64,17 +64,17 @@ public class MainService {
         System.out.println(userDAO.getByPK(user2.getId()));
         user2.setEmail("test@test.ru2");
         System.out.println(userDAO.getByPK(user2.getId()));
-
+//
         UserInfo userInfo2 = new UserInfo();
         userInfo2.setId(user2);
         userInfo2.setFirstName("name");
         userInfo2.setSecondName("secondname");
         userInfo2.setLastName("lastname");
         userInfoDAO.save(userInfo2);
-        System.out.println(userInfoDAO.getByPK(user2));
-
-        user2.setEmail("test@test.ru3");
-        System.out.println(userInfoDAO.getByPK(user2)); //TODO
+        System.out.println("right " + userInfoDAO.getByPK(user2));
+////
+//        user2.setEmail("test@test.ru3");
+//        System.out.println(userInfoDAO.getByPK(user2)); //TODO
 
 //        User user2 = new User(UUID.randomUUID(), UUID.randomUUID().toString(), "User1", "test@test2.ru");
 //        user.setUserInfo(extraUserInfo);
@@ -82,8 +82,8 @@ public class MainService {
 //        userInfoDAO.save(extraUserInfo);
 //        userDAO.save(user);
 //        System.out.println(userInfoDAO.getByPK(user)); //TODO будет ошибка
-        user.setPassword("passwfgfdgdgdfgdcord");
-        user.setUserInfo(new UserInfo());
+//        user.setPassword("passwfgfdgdgdfgdcord");
+//        user.setUserInfo(new UserInfo());
 
 //        System.out.println(userInfoDAO.getByPK(user));
 
@@ -103,22 +103,35 @@ public class MainService {
 //        user2.setUserInfo(extraUserInfo);
 //        userDAO.save(user);
 
-        Set<User> users = new HashSet<>();
-        users.add(user);
-        //users.add(user2);
-        Organization organization = new Organization(1L, "ООО Организация 1");
-        organization.setOrganizationStatus(OrganizationStatus.STATUS_CREATED);
-        organization.setUsers(users);
-        organizationDAO.save(organization);
-        System.out.println(organizationDAO.getByPK(organization.getId()));
-        organization.setUpdatedAt(LocalDateTime.now());
+//        Set<User> users = new HashSet<>();
+//        users.add(user);
+//        //users.add(user2);
+//        Organization organization = new Organization(1L, "ООО Организация 1");
+//        organization.setOrganizationStatus(OrganizationStatus.STATUS_CREATED);
+//        organization.setUsers(users);
+//        organizationDAO.save(organization);
+//        System.out.println(organizationDAO.getByPK(organization.getId()));
+//        organization.setUpdatedAt(LocalDateTime.now());
+////
+//        System.out.println(organizationDAO.getByPK(organization.getId()));
 //
-        System.out.println(organizationDAO.getByPK(organization.getId()));
-
-        System.out.println(organizationDAO.getByUser(user));
-        System.out.println(organizationDAO.getByUser(new User(UUID.randomUUID().toString(), UUID.randomUUID().toString(),"Admin1", "test@test.ru")));
+//        System.out.println(organizationDAO.getByUser(user));
+//        System.out.println(organizationDAO.getByUser(new User(UUID.randomUUID().toString(), UUID.randomUUID().toString(),"Admin1", "test@test.ru")));
 //
 //        System.out.println(userInfoDAO.getAll());
 
+        System.out.println("----------------");
+//        Map<User, UserInfo> users = new TreeMap<>(new Comparator<User>() {
+//            @Override
+//            public int compare(User o1, User o2) {
+//                return o1.getUuid().compareTo(o2.getUuid());
+//            }
+//        });
+
+        Map<User, UserInfo> users = new TreeMap<>();
+        users.put(user, userInfo);
+        users.put(user2, userInfo2);
+
+        System.out.println(users);
     }
 }
