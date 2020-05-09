@@ -26,3 +26,4 @@ build/
 bin/
 **/out/
 **/webpack-build/
+.gradle/
