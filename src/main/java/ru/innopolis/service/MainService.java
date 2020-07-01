@@ -41,14 +41,15 @@ public class MainService {
                      new AnnotationConfigApplicationContext(SpringConfig.class);
 
        UserService userService = (UserService) context.getBean("userServiceImpl");
-        userInfoDAO = (UserInfoDAO) context.getBean("getUserInfoDAO");
+//        userInfoDAO = (UserInfoDAO) context.getBean("getUserInfoDAO");
+        userInfoDAO = context.getBean(UserInfoDAO.class);
 
         UserInfo userInfo = new UserInfo();
         userInfo.setId(UUID.randomUUID());
         userInfo.setFirstName("name");
         userInfo.setSecondName("secondname");
         userInfo.setLastName("lastname");
-//        userInfoDAO.save(userInfo);
+        userInfoDAO.save(userInfo);
 
 //        ExtraUserInfo extraUserInfo = new ExtraUserInfo();
 //        extraUserInfo.setAddress("Address2");

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * @author lifeandfree
  */
 @Service
-//@Scope("prototype")
+@Scope("prototype")
 public class UserServiceImpl implements UserService {
 
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class.getName());
@@ -34,10 +34,15 @@ public class UserServiceImpl implements UserService {
         this.userDAO = userDAO;
         this.userInfoDAO = userInfoDAO;
     }
+//
+//    @Autowired
+//    public void setUserDAO(UserDAO userDAO) {
+//        this.userDAO = userDAO;
+//    }
 
     @PostConstruct
     public void postConstruct() {
-        log.info("info");
+        log.info("postConstruct");
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * UserDAOImpl.
- *
+ *currentTime
  * @author Ilya_Sukhachev
  */
 public class UserDAOImpl extends AbstractUuidDao<User, UUID, String> implements UserDAO {

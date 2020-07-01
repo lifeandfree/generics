@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import ru.innopolis.dao.UserDAO;
 import ru.innopolis.dao.UserInfoDAO;
 import ru.innopolis.dao.list.UserDAOImpl;
@@ -19,6 +20,7 @@ import ru.innopolis.service.processor.BeanPostProcessorImpl;
  */
 @Configuration
 @ComponentScan("ru.innopolis")
+//@Import({SpringConfig.class})
 public class SpringConfig {
 
     @Bean
@@ -27,6 +29,7 @@ public class SpringConfig {
     }
 
     @Bean
+//    @Primary
     public UserDAO getUserDAO() {
         return new UserDAOImpl();
     }
